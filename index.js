@@ -6,6 +6,7 @@ const port = 3000;
 const Chat=require("./models/chat.js");
 
 
+
 //creating obj of model chat
 let chat1=new Chat({
     from:"sunny",
@@ -36,8 +37,9 @@ main().then(()=>{
 
 
 //ejs
-app.get('/', (req, res) => {
-  res.send("working")
+app.get("/chats",async(req,res)=>{
+    let chats= await Chat.find();
+    res.render("index.ejs",{chats});
 })
 
 
@@ -45,3 +47,6 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
   console.log(`whatsapp app listening on port ${port}`)
 })
+
+//for css
+app.use(express.static(path.join(__dirname,"public")));
