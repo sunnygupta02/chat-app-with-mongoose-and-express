@@ -4,11 +4,14 @@ const path=require("path");
 const app = express();
 const port = 3000;
 const Chat=require("./models/chat.js");
+const methodOverride = require('method-override')
 
 //to parse data coming from new.ejs 
 app.use(express.urlencoded({extended:true}));
 
 
+//to override with post having?_method=put where: real req=put
+app.use(methodOverride('_method'));
 
 //creating obj of model chat
 // let chat1=new Chat({
@@ -79,8 +82,16 @@ app.get("/chats/:id/edit",async (req,res)=>{
 })
 
 //5. update route
-app.put("chats/:id",(req,res)=>{
-    res.send("updated")
+app.put("/chats/:id",async (req,res)=>{
+    let {id}=req.params;
+    let{msg:newmsg}=req.body;
+    let updatedchat=await Chat.findByIdAndUpdate(id,{
+    msg:newmsg
+    },{
+        runValidators:true,new:true
+    })
+
+    res.redirect("/chats");
 })
 
 
