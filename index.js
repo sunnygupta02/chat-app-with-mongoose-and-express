@@ -94,6 +94,14 @@ app.put("/chats/:id",async (req,res)=>{
     res.redirect("/chats");
 })
 
+//6 delete route
+app.delete("/chats/:id", async (req,res)=>{
+    let {id}=req.params;
+    let chattobedeleted=await Chat.findByIdAndDelete(id);
+    console.log(chattobedeleted);
+    res.redirect("/chats");
+})
+
 
 //express
 app.listen(port, () => {

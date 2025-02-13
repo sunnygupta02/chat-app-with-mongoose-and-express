@@ -1,5 +1,5 @@
 .chatbox{
-    height: 350px;
+    height: 400px;
     width: 400px;
 display: inline-block;
     border: 1px solid black;
@@ -10,7 +10,7 @@ display: inline-block;
     margin: 10px;
     border-radius: 10px;
     padding: 10px 15px;
-    height: 100px;
+    height: 150px;
     width: 150px;
     border: 0.5px solid blue;
 background-color: lightblue;
