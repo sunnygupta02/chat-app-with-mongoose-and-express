@@ -3,6 +3,23 @@ const mongoose = require('mongoose');
 const path=require("path");
 const app = express();
 const port = 3000;
+const Chat=require("./models/chat.js");
+
+
+//creating obj of model chat
+let chat1=new Chat({
+    from:"sunny",
+    to:"shivam",
+    msg:"hi how r u?",
+    created_at:new Date()
+})
+
+//saving obj
+chat1.save().then((res)=>{
+    console.log(res);
+}).catch((err)=>{
+    console.log(err);
+})
 
 //ejs
 app.set("view engine","ejs");
