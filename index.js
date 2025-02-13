@@ -5,6 +5,9 @@ const app = express();
 const port = 3000;
 const Chat=require("./models/chat.js");
 
+//to parse data coming from new.ejs 
+app.use(express.urlencoded({extended:true}));
+
 
 
 //creating obj of model chat
@@ -48,6 +51,26 @@ app.get("/chats/new",(req,res)=>{
     res.render("new.ejs");
 
 })
+ //3.post request to insert data into db and reflect output in index page
+app.post("/chats",(req,res)=>{
+
+    let{from,to,msg}=req.body;
+let newchat=new Chat({
+    from:from,
+    to:to,
+    msg:msg,
+    created_at:new Date()
+});
+newchat.save().then((res)=>{
+    console.log(res);
+}).catch((err)=>{
+    console.log(err);
+})
+
+res.redirect("/chats");
+
+})
+
 
 
 //express
