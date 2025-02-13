@@ -15,7 +15,14 @@
     <%for(chat of chats){ %>
         <div class="chatbox">
             <p>from: <%=chat.from%></p>
-            <p class="msg">msg: <%=chat.msg%></p>
+            <div class="msg">
+
+                <p >msg: <%=chat.msg%></p>
+                <form method="GET" action="/chats/<%=chat.id%>/edit">
+                    <button>edit</button>
+                </form>
+               
+            </div>
             <p>to: <%=chat.to%></p>
             <hr>
             <p>time:<%=chat.created_at.toString().split(" ")[4]%></p>
